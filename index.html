@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VX FAKE LAG</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#080b0d;color:white;
+ font-family:Arial,sans-serif;
+ display:flex;justify-content:center;
+ min-height:100vh;align-items:center;
+}
+.panel{
+ width:90%;max-width:370px;
+ background:#111719;border:1px solid #00ff77;
+ border-radius:18px;padding:22px;
+ box-shadow:0 0 20px #00ff7730;
+}
+h1{text-align:center;color:#00ff77}
+.sub{text-align:center;color:#aaa;font-size:12px}
+.status{
+ background:#080d0e;padding:14px;
+ border-radius:10px;text-align:center;
+ margin:20px 0;color:#00ff77;
+}
+button{
+ width:100%;padding:15px;margin:7px 0;
+ border:1px solid #00ff77;
+ border-radius:10px;background:#17221d;
+ color:white;font-weight:bold;font-size:15px;
+}
+button:active{background:#00a94e}
+.freeze{background:#202a30}
+#minimize{
+ position:fixed;right:12px;top:12px;
+ width:auto;background:#00a94e;
+}
+#frozen{
+ display:none;position:fixed;inset:0;
+ background:#050708;z-index:5;
+ align-items:center;justify-content:center;
+ flex-direction:column;text-align:center;
+}
+#frozen h1{font-size:35px}
+#frozen p{color:#aaa}
+#frozen button{width:220px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<button id="minimize" onclick="togglePanel()">MINIMIZAR</button>
+
+<div class="panel" id="panel">
+<h1>VX FAKE LAG</h1>
+<p class="sub">GAMER CONTROL PANEL</p>
+
+<div class="status" id="status">
+STATUS: NORMAL
+</div>
+
+<button onclick="fakeLag()">⚡ FAKE LAG ON/OFF</button>
+<button class="freeze" onclick="freeze()">❄️ FREEZE ON</button>
+<button onclick="unfreeze()">▶ DESCONGELAR</button>
+
+<p class="sub">VX FAKE LAG • MOBILE EDITION</p>
+</div>
+
+<div id="frozen">
+<h1>❄️ FREEZE</h1>
+<p>Tela congelada na simulação</p>
+<button onclick="unfreeze()">▶ DESCONGELAR</button>
+</div>
+
+<script>
+let lag=false;
+let frozen=false;
+let minimized=false;
+
+function fakeLag(){
+ if(frozen)return;
+ lag=!lag;
+ document.getElementById("status").innerText=
+ lag?"STATUS: FAKE LAG SIMULADO":"STATUS: NORMAL";
+ document.getElementById("status").style.color=
+ lag?"#ff4545":"#00ff77";
+}
+
+function freeze(){
+ frozen=true;
+ document.getElementById("frozen").style.display="flex";
+ document.getElementById("status").innerText="STATUS: FREEZE";
+}
+
+function unfreeze(){
+ frozen=false;
+ lag=false;
+ document.getElementById("frozen").style.display="none";
+ document.getElementById("status").innerText="STATUS: NORMAL";
+ document.getElementById("status").style.color="#00ff77";
+}
+
+function togglePanel(){
+ minimized=!minimized;
+ document.getElementById("panel").classList.toggle("hidden",minimized);
+ document.getElementById("minimize").innerText=
+ minimized?"ABRIR PAINEL":"MINIMIZAR";
+}
+</script>
+
+</body>
+</html>
